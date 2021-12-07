@@ -36,6 +36,7 @@ namespace DictionaryByBinaryTree
             selfMadeDic[1] = "sdasd";
             selfMadeDic[2] = "sda";
             selfMadeDic[1] = "qwerqwr";
+            selfMadeDic.Add(1, "asd");
 
             var fileService = new FileService<int, string>();
 

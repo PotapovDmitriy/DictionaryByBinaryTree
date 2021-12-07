@@ -41,7 +41,14 @@ namespace DictionaryByBinaryTree
 
         public void Add(KeyValuePair<TKey, TValue> item)
         {
-            Tree.Add(ConvertToDictionaryItem(item));
+            var dictionaryItem = Tree.FirstOrDefault(i => i.Key.CompareTo(item.Key) == 0);
+            if (dictionaryItem is not null)
+                dictionaryItem.Value = item.Value;
+            else
+                Tree.Add(new DictionaryItem<TKey, TValue>()
+                {
+                    Key = item.Key, Value = item.Value
+                });
         }
 
         public void Clear()

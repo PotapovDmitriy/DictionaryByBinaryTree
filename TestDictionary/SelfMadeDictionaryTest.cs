@@ -28,6 +28,18 @@ namespace TestDictionary
             Assert.AreEqual(2, testedDic.Count);
             Assert.AreEqual(0, _assertedDic.Except(testedDic).Count());
         }
+        
+        
+        [Test]
+        public void AddDuplicateItemTest()
+        {
+            var testedDic = new SelfMadeDictionary<int, string>();
+            testedDic.Add(1, "One");
+            testedDic.Add(2, "Two");
+            testedDic.Add(1, "NotOne");
+            Assert.AreEqual(2, testedDic.Count);
+            Assert.AreEqual("NotOne", testedDic[1]);
+        }
 
         [Test]
         public void AddItemByKeyTest()
