@@ -96,7 +96,7 @@ namespace DictionaryByBinaryTree
 
             value = item is not null ? item.Value : default!;
 
-            return item == null;
+            return item != null;
         }
 
         private DictionaryItem<TKey, TValue> ConvertToDictionaryItem(KeyValuePair<TKey, TValue> item)

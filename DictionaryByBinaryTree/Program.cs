@@ -39,9 +39,9 @@ namespace DictionaryByBinaryTree
 
             var fileService = new FileService<int, string>();
 
-            fileService.WriteDictionaryToFileAsync(selfMadeDic);
+            fileService.WriteDictionaryToFile(selfMadeDic);
 
-            var newDic = fileService.ReadDictionaryFromFileAsync();
+            var newDic = fileService.ReadDictionaryFromFile();
         }
     }
 }
