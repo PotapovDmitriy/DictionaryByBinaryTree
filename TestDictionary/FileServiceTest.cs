@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using DictionaryByBinaryTree;
 using NUnit.Framework;
 
@@ -17,7 +15,7 @@ namespace TestDictionary
             var actualFilePath =
                 "D:\\rider projects\\DictionaryByBinaryTree\\DictionaryByBinaryTree\\TestDictionary\\test1.txt";
 
-            var fileService = new FileService<int, string>();
+            var fileService = new FileService();
             var testedDic = new SelfMadeDictionary<int, string>();
             testedDic.Add(1, "One");
             testedDic.Add(2, "Two");
@@ -37,8 +35,8 @@ namespace TestDictionary
                 "D:\\rider projects\\DictionaryByBinaryTree\\DictionaryByBinaryTree\\TestDictionary\\test.txt";
             
 
-            var fileService = new FileService<int, string>();
-            var testedDic = fileService.ReadDictionaryFromFile(testFilePath);
+            var fileService = new FileService();
+            var testedDic = fileService.ReadDictionaryFromFile<int, string>(testFilePath);
             var assertedDic = new Dictionary<int, string>
             {
                 {1, "One"}, {2, "Two"}

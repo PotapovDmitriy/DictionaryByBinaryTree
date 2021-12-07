@@ -38,11 +38,11 @@ namespace DictionaryByBinaryTree
             selfMadeDic[1] = "qwerqwr";
             selfMadeDic.Add(1, "asd");
 
-            var fileService = new FileService<int, string>();
+            var fileService = new FileService();
 
             fileService.WriteDictionaryToFile(selfMadeDic);
 
-            var newDic = fileService.ReadDictionaryFromFile();
+            var newDic = fileService.ReadDictionaryFromFile<int, string>();
         }
     }
 }
