@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace TestDictionary
 {
-    public class Tests
+    public class SelfMadeDictionaryTest
     {
         private IDictionary<int, string> _assertedDic;
 
