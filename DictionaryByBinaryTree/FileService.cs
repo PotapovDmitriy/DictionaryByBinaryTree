@@ -1,23 +1,29 @@
-﻿using System;
-using System.IO;
-using Newtonsoft.Json;
+﻿using System.IO;
 
 namespace DictionaryByBinaryTree
 {
-    public class FileService 
+    public class FileService : IFileService
     {
-        public void WriteDictionaryToFile<TKey, TValue>(SelfMadeDictionary<TKey, TValue> dictionary,
-            string path = "test.txt") where TKey : IComparable<TKey>
+        public void WriteToFile(string path, string content, bool isClose = true)
         {
-            File.WriteAllText(path, JsonConvert.SerializeObject(dictionary));
+            // File.WriteAllText(path, content);
+
+            var stream = new StreamWriter(path);
+            stream.Write(content);
+            
+            if (isClose)
+                stream.Close();
         }
 
-        public SelfMadeDictionary<TKey, TValue> ReadDictionaryFromFile<TKey, TValue>(string path = "test.txt")
-            where TKey : IComparable<TKey>
+        public string? ReadFromFile(string path, bool isClose = true)
         {
-            var dictionaryString = File.ReadAllText(path);
+            // return File.ReadAllText(path);
+            var stream = new StreamReader(path);
+            var content = stream.ReadLine();
+            if (isClose)
+                stream.Close();
 
-            return JsonConvert.DeserializeObject<SelfMadeDictionary<TKey, TValue>>(dictionaryString);
+            return content;
         }
     }
 }
