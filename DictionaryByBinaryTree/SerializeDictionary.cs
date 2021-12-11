@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Json;
 using Newtonsoft.Json;
 
 namespace DictionaryByBinaryTree
@@ -9,7 +11,15 @@ namespace DictionaryByBinaryTree
         public void WriteDictionaryToFile<TKey, TValue>(IDictionary<TKey, TValue> dictionary,
             IFileService fileService, string path = "test.txt", bool closeStream = true) where TKey : IComparable<TKey>
         {
-            fileService.WriteToFile(path, JsonConvert.SerializeObject(dictionary), closeStream);
+            
+            var formatter = new DataContractJsonSerializer(typeof(IDictionary<TKey, TValue>));
+
+            Stream fs = fileService.GetWriteStream(path);
+            formatter.WriteObject(fs, dictionary);
+
+            if (closeStream)
+                fs.Close();
+
         }
 
         public IDictionary<TKey, TValue> ReadDictionaryFromFile<TKey, TValue>(IFileService fileService,
@@ -17,9 +27,15 @@ namespace DictionaryByBinaryTree
             bool closeStream = true)
             where TKey : IComparable<TKey>
         {
-            var dictionaryString = fileService.ReadFromFile(path, closeStream);
+            var formatter = new DataContractJsonSerializer(typeof(IDictionary<TKey, TValue>));
+            var fs = fileService.GetReadStream(path);
 
-            return JsonConvert.DeserializeObject<SelfMadeDictionary<TKey, TValue>>(dictionaryString);
+            var result = (IDictionary<TKey, TValue>) formatter.ReadObject(fs);
+
+            if (closeStream)
+                fs.Close();
+
+            return result;
         }
     }
 }

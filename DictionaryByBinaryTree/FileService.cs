@@ -2,28 +2,16 @@
 
 namespace DictionaryByBinaryTree
 {
-    public class FileService : IFileService
+ public class FileService : IFileService
     {
-        public void WriteToFile(string path, string content, bool isClose = true)
+        public Stream GetReadStream(string name)
         {
-            // File.WriteAllText(path, content);
-
-            var stream = new StreamWriter(path);
-            stream.Write(content);
-            
-            if (isClose)
-                stream.Close();
+            return new FileStream(name, FileMode.Open);
         }
 
-        public string? ReadFromFile(string path, bool isClose = true)
+        public Stream GetWriteStream(string name)
         {
-            // return File.ReadAllText(path);
-            var stream = new StreamReader(path);
-            var content = stream.ReadLine();
-            if (isClose)
-                stream.Close();
-
-            return content;
+            return new FileStream(name, FileMode.OpenOrCreate);
         }
     }
 }

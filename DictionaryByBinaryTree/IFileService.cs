@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace DictionaryByBinaryTree
 {
     public interface IFileService
     {
-        void WriteToFile(string path, string content, bool isClose = true);
-        string? ReadFromFile(string path, bool isClose = true );
+        Stream GetReadStream(string name);
+        Stream GetWriteStream(string name);
     }
 }
